@@ -1,0 +1,14 @@
+{
+  "name": "bodsch-phpfpm",
+  "version": "0.3.0",
+  "author": "bodsch",
+  "summary": "Manages php-fpm daemon and pool configuration",
+  "license": "GPLv3",
+  "source": "https://github.com/bodsch/puppet-phpfpm",
+  "project_page": "(https://github.com/bodsch/puppet-phpfpm)",
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "debian",
+  ],
+  "dependencies": []
+}

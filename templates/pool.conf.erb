@@ -1,0 +1,125 @@
+[<%= @title %>]
+
+prefix                              = /var/log/php-fpm/$pool
+
+user                                = <%= @user %>
+group                               = <%= @group %>
+
+listen                              = <%= @listen %>
+<%- if @listen_backlog -%>
+listen.backlog                      = <%= @listen_backlog %>
+<%- end -%>
+<%- if @listen_owner -%>
+listen.owner                        = <%= @listen_owner %>
+<%- end -%>
+<%- if @listen_group -%>
+listen.group                        = <%= @listen_group %>
+<%- end -%>
+<%- if @listen_mode -%>
+listen.mode                         = <%= @listen_mode %>
+<%- end -%>
+<%- if @listen_allowed_clients -%>
+listen.allowed_clients              = <%= @listen_allowed_clients %>
+<%- end -%>
+
+pm                                  = <%= @pm %>
+pm.max_children                     = <%= @pm_max_children %>
+pm.start_servers                    = <%= @pm_start_servers %>
+pm.min_spare_servers                = <%= @pm_min_spare_servers %>
+pm.max_spare_servers                = <%= @pm_max_spare_servers %>
+<%- if @pm_process_idle_timeout -%>
+pm.process_idle_timeout             = <%= @pm_process_idle_timeout %>
+<%- end -%>
+<%- if @pm_max_requests -%>
+pm.max_requests                     = <%= @pm_max_requests %>
+<%- end -%>
+<%- if @pm_status_path -%>
+pm.status_path                      = <%= @pm_status_path %>
+<%- end -%>
+
+<%- if @ping_path -%>
+ping.path                           = <%= @ping_path %>
+<%- end -%>
+<%- if @ping_response -%>
+ping.response                       = <%= @ping_response %>
+<%- end -%>
+
+<%- if @access_log -%>
+access.log                          = <%= @access_log %>
+<%- end -%>
+<%- if @access_format -%>
+access.format                       = <%= @access_format %>
+<%- end -%>
+<%- if @slowlog -%>
+slowlog                             = <%= @slowlog %>
+<%- end -%>
+<%- if @request_slowlog_timeout -%>
+request_slowlog_timeout             = <%= @request_slowlog_timeout %>
+<%- end -%>
+<%- if @request_terminate_timeout -%>
+request_terminate_timeout           = <%= @request_terminate_timeout %>
+<%- end -%>
+
+<%- if @rlimit_files -%>
+rlimit_files                        = <%= @rlimit_files %>
+<%- end -%>
+<%- if @rlimit_core -%>
+rlimit_core                         = <%= @rlimit_core %>
+<%- end -%>
+<%- if @chroot -%>
+chroot                              = <%= @chroot %>
+<%- end -%>
+chdir                               = <%= @chdir %>
+
+<%- if @catch_workers_output -%>
+catch_workers_output                = <%= @catch_workers_output %>
+<%- end -%>
+<%- if @security_limit_extensions -%>
+security.limit_extensions           = <%= @security_limit_extensions %>
+<%- end -%>
+
+;env[HOSTNAME] = $HOSTNAME
+;env[PATH] = /usr/local/bin:/usr/bin:/bin
+;env[TMP] = /tmp
+;env[TMPDIR] = /tmp
+;env[TEMP] = /tmp
+<%-
+  if @env
+   @env.sort.each do |k,v|
+-%>
+env[<%= k %>] = <%= v %>
+<%- end -%>
+<%- end -%>
+
+<%- 
+  if @php_value
+    @php_value.sort.each do |k,v|
+-%>
+php_value[<%= k %>] = <%= v %>
+<%- end -%>
+<%- end -%>
+
+<%-
+ if @php_flag
+   @php_flag.sort.each do |k,v|
+-%>
+php_flag[<%= k %>] = <%= v %>
+<%- end -%>
+<%- end -%>
+
+<%-
+  if @php_admin_value
+    @php_admin_value.sort.each do |k,v|
+-%>
+php_admin_value[<%= k %>] = <%= v %>
+<%- end -%>
+<%- end -%>
+
+<%-
+  if @php_admin_flag
+    @php_admin_flag.sort.each do |k,v|
+-%>
+php_admin_flag[<%= k %>] = <%= v %>
+<%- end -%>
+<%- end -%>
+

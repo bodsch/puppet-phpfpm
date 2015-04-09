@@ -41,6 +41,7 @@ define phpfpm::pool (
     $service_name              = $phpfpm::params::service_name,
     $pool_dir                  = $phpfpm::params::pool_dir,
 ) {
+
   $pool_file_path = "${pool_dir}/${name}.conf"
 
   if ( $pm_start_servers < $pm_min_spare_servers or $pm_start_servers > $pm_max_spare_servers ) {
@@ -66,7 +67,7 @@ define phpfpm::pool (
         mode     => '0644',
         content  => template('phpfpm/pool.conf.erb'),
         require  => [
-          Class['Phpfpm::Package'],
+          Package[$phpfpm::params::package_name],
           File[$phpfpm::params::logdir]
         ]
 #        notify   => Service[$service_name],

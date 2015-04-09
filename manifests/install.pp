@@ -5,11 +5,23 @@
 
 class phpfpm::install {
 
-  class {
-    'phpfpm::package':
-      ensure       => $phpfpm::ensure,
-      package_name => $phpfpm::package_name,
+  include phpfpm::params
+
+  package {
+    $phpfpm::params::package_name:
+      ensure => $phpfpm::ensure
   }
+
+  package {
+    $phpfpm::params::package_memcached:
+      ensure => $phpfpm::ensure
+  }
+
+#   class {
+#     'phpfpm::package':
+#       ensure       => $phpfpm::ensure
+#   }
+
 }
 
 # EOF
